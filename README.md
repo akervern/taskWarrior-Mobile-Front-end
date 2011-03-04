@@ -14,4 +14,8 @@ Execute Rake
 
     $ rake
 
+## TaskWarrior
 
+Taskwarrior is an ambitious project to supercharge task with an interactive interface, GTD features, color themes, data synch, dependencies, custom reports, charts, and Lua plugins, all while our international team provides excellent support!
+
+More information on: <http://taskwarrior.org/>
