@@ -8,11 +8,18 @@ First, you need to make sure you have:
 
 - Ruby 
 - Rake
+- RSpec
 - Sinatra
+
+- TaskWarrior
 
 Execute Rake
 
     $ rake
+
+Execute test
+
+    $ rake test
 
 ## TaskWarrior
 
