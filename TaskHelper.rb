@@ -2,6 +2,8 @@ class TaskSplitter
   TaskExec = "/usr/local/bin/task"
   @@userName = "arnaud"
 
+  attr_accessor :columns 
+
   def list
     res = `#{TaskExec} long`.split("\n")
     @columns = splitHead(res[2])
@@ -45,6 +47,8 @@ class TaskSplitter
   end
 end
 
+
+=begin
 # Sample
 a = TaskSplitter.new
 list = a.list
@@ -57,5 +61,6 @@ a.each_line(list) do |line|
   end
   puts "Annotation !" if isAnnotation
 end
+=end
 
 nil
