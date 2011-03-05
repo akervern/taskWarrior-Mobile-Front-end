@@ -45,6 +45,22 @@ class TaskSplitter
     end
     annotation
   end
+
+  def fillTaskHolder (line)
+    holder = TaskHolder.new
+	holder.line = line
+	holder.columns = Array.new
+	holder.isAnnotation = each_column(line) do |value|
+	  holder.columns.push value
+	end
+	holder
+  end
+end
+
+class TaskHolder
+  attr_accessor :line
+  attr_accessor :columns
+  attr_accessor :isAnnotation
 end
 
 
