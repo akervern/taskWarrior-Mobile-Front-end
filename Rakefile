@@ -22,7 +22,7 @@ end
 
 # Thin tasks
 task :clean_thin do
-  Dir.glob("app/*.log").each do |file|
+  Dir.glob("*.log").each do |file|
     File.delete(file)
   end
 end
