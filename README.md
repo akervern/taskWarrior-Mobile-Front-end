@@ -1,6 +1,6 @@
 # TaskWarrior Mobile front-end 
 
-A Sinatra / JQTouch based apps to manage taskWarrior data
+A Sinatra / JQuery Mobile based apps to manage taskWarrior data
 
 ## Building
 
