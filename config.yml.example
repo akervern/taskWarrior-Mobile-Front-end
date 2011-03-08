@@ -1,0 +1,11 @@
+environment: production
+chdir: /path/to/taskWarrior-Mobile-Front-end 
+address: 127.0.0.1
+port: 4567
+pid: /path/to/taskWarrior-Mobile-Front-end/thin.pid
+rackup: /path/to/taskWarrior-Mobile-Front-end/config.ru
+log: /path/to/taskWarrior-Mobile-Front-end/thin.log
+max_conns: 1024
+timeout: 30
+max_persistent_conns: 64
+daemonize: true

@@ -1,3 +1,7 @@
 syntax:blob
 
 *.swp
+*.ru
+*.yml
+*.log
+*.pid
