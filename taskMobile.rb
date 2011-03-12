@@ -19,10 +19,16 @@ get '/task' do
   erb :task_list
 end
 
-get '/task/:name' do
-  "Display task for #{params[:name]} !"
+post '/task/add' do
+  TaskSplitter.new.addTask(params[:task], params[:project], params[:dueDate])
+  redirect '/task'
 end
 
-get '/task/:name/:id' do
-  "Display task for #{params[:name]} with id #{params[:id]} !"
+get '/task/done/:id' do
+  TaskSplitter.new.doneTask params[:id]
+  redirect '/task'
+end
+
+get '/task/:name' do
+  "Display task for #{params[:name]} !"
 end

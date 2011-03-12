@@ -2,30 +2,73 @@
 <html>
   <head>
     <title>Task list</title>
-    <link rel="stylesheet" href="css/jquery.mobile-1.0a3.min.css" />
-    <script src="js/jquery-1.5.1.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="js/jquery.mobile-1.0a3.min.js" type="application/x-javascript" charset="utf-8"></script>
-    
+    <link rel="stylesheet" href="/css/jquery.mobile-1.0a3.min.css" />
+    <script src="/js/jquery-1.5.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/js/jquery.mobile-1.0a3.min.js" type="application/x-javascript" charset="utf-8"></script>
+    <meta name="apple-mobile-web-app-capable" content="yes" >
+    <script type="text/javascript">
+      $('.ui-li').live('swiperight', function(event) {
+        var liIndex = /li(\d)/.exec(event.currentTarget.id)[1]
+        $(".timeLeft").show()
+        $(".btnDone").hide()
+        $("#btn" + liIndex).show(200)
+        $("#timeLeft" + liIndex).hide()
+      });
+      $('div').live('pageshow', function(event) {
+        $('.btnDone').hide()
+      })
+    </script>
   </head>
-  <body data-role="page" id="demolist">
-    <div data-role="header">
-      <h1>Task List</h1>
-    </div>
+  <body>
+    <div data-role="page" data-theme="b" id="taskList">
+      <div data-role="header" data-position="inline">
+        <a href="/task" data-ajax="false" data-icon="refresh">Refresh</a>
+        <h1>Task List</h1>
+        <a href="#addTask" data-icon="add" data-iconpos="right">Add task</a>
+      </div>
 
-    <div data-role="content" class="ui-content" role="main">
-      <ul data-role="listview" class="ui-listview" role="listbox">
-        <% @lines.each do |line| %>
-          <% unless line.isAnnotation %>
-            <li role="option>" data-theme="c" class="ui-btn ui-btn-icon-right ui-li ui-btn-up-c">
-              <div class="ui-btn-text">
-                <p class="ui-li-aside ui-li-desc"><%= "<strong>#{line.columns[7]} left</strong>" unless line.columns[7].empty? %></p>
-                <h3 class="ui-li-heading"><%= line.columns[11] %></h3>
-                <p class="ui-li-desc"><%= "Project: <strong>#{line.columns[1]}</strong>" unless line.columns[1].empty? %></p>
-              </div>
-            </li>
+      <div data-role="content" class="ui-content" role="main">
+        <ul data-role="listview" class="ui-listview" role="listbox">
+          <% @lines.each do |line| %>
+            <% unless line.isAnnotation %>
+              <li role="option" class="ui-btn ui-li ui-btn-up-c" id="<%= "li#{line.columns[0]}" %>">
+                <div>
+                  <p class="ui-li-aside">
+                  <%= "<strong class=\"timeLeft\" id=\"timeLeft#{line.columns[0]}\">#{line.columns[7]} left</strong>" unless line.columns[7].empty? %>
+                  <a class="btnDone" href="/task/done/<%= line.columns[0] %>" data-role="button" data-inline="true" id="btn<%= line.columns[0] %>" style="width: 5.6em;">Done ?</a>
+                  </p>
+                  <h3 class="ui-li-heading"><%= line.columns[11] %></h3>
+                  <p class="ui-li-desc"><%= "Project: <strong>#{line.columns[1]}</strong>" unless line.columns[1].empty? %>
+                  </p>
+                </div>
+              </li>
+            <% end %>
           <% end %>
-        <% end %>
-      </ul>
+        </ul>
+      </div>
+    </div>
+    <div data-role="page" id="addTask" data-theme="b">
+      <div data-role="header" data-position="inline">
+        <h1>Add Task</h1>
+      </div>
+
+      <div data-role="content" class="ui-content">
+        <form action="/task/add" method="post">
+          <div data-role="fieldcontain">
+            <label for="taskLbl">Task:</label>
+            <input type="text" name="task" id="taskLbl" value=""  />
+          </div>
+          <div data-role="fieldcontain">
+            <label for="taskProject">Project:</label>
+            <input type="text" name="project" id="taskProject" value=""  />
+          </div>
+          <div data-role="fieldcontain">
+            <label for="taskDueDate">DueDate:</label>
+            <input type="text" name="dueDate" id="taskDueDate" value=""  />
+          </div>
+          <input type="submit" value="Create task" />
+        </form>
+      </div>
     </div>
   </body>
 </html>

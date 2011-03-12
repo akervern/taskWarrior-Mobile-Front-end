@@ -14,6 +14,16 @@ class TaskSplitter
     `#{TaskExec} info #{id}`.split("\n")
   end
 
+  def addTask(task, project, dueDate)
+    strProject = "project:#{project.strip}" unless project.nil? || project.strip.empty?
+    strDue = "due:#{dueDate.strip}" unless !dueDate.nil? || dueDate.strip.empty?
+    `#{TaskExec} add #{strProject} #{strDue} #{task}`
+  end
+
+  def doneTask(id)
+    `#{TaskExec} done #{id}`
+  end
+
   def splitHead(header)
     header.split.collect { |chars| chars.length }
   end
