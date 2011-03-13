@@ -10,16 +10,32 @@ First, you need to make sure you have:
 - Rake
 - RSpec
 - Sinatra
-
+- Thin
 - TaskWarrior
 
-Execute Rake
+If something is missing, you can install it with Gem.
+
+    $ gem install rake rspec sinatra thin
+
+Launch Sinatra in dev mode 
 
     $ rake
 
 Execute test
 
     $ rake test
+
+Execute test in doc mode
+
+    $ rake doc
+
+Launch daemon using Thin, you need to have a config.ru file and a config.yml. (refer to *.example)
+
+    $ rake start
+
+Stop daemon if stated
+
+    $ rake stop
 
 ## TaskWarrior
 
